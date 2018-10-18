@@ -1,5 +1,5 @@
 
 // do not use this hoc anymore
-const main = (props) => props.children
+const Aux = (props) => props.children
 
-export default main
+export default Aux
