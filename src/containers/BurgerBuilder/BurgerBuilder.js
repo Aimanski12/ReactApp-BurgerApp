@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react'; 
-import Aux from '../../hoc/Aux'
+import Main from '../../Fragment/Fragments'
 
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -100,7 +100,7 @@ class BurgerBuilder extends Component {
     return (
 
 
-      <Aux>
+      <Main>
         <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients}/>
         </Modal>
@@ -113,7 +113,7 @@ class BurgerBuilder extends Component {
           purchasable={this.state.purchasable}
           ordered={this.purchaseHandler}
         />
-      </Aux>
+      </Main>
     )
   }
 }
