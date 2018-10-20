@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react'; 
-import Main from '../../Fragment/Fragments'
+import Main from '../../Fragment/Fragments/Fragments'
 
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -37,12 +37,12 @@ class BurgerBuilder extends Component {
    
     const sum = Object.keys(ingredients)
       .map(igKey => {
-        console.log('igKey: ', igKey)
+        // console.log('igKey: ', igKey)
         return ingredients[igKey]
       })
       .reduce((sum, el) => {
-        console.log('sum: ', sum)
-        console.log('el: ', el)
+        // console.log('sum: ', sum)
+        // console.log('el: ', el)
         return sum + el 
       }, 0);
       this.setState({purchasable: sum > 0})
@@ -55,7 +55,7 @@ class BurgerBuilder extends Component {
     const updatedIngredients = {
       ...this.state.ingredients
     }
-    console.log('updated ingri: ', updatedIngredients)
+    // console.log('updated ingri: ', updatedIngredients)
     updatedIngredients[type] = updatedCount;
     const priceAddition = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
@@ -117,7 +117,9 @@ class BurgerBuilder extends Component {
             purchaseContinued={this.purchaseContinueHandler}
           />
         </Modal>
+
         <Burger ingredients={this.state.ingredients}/>
+
         <BuildControls 
           ingredientsAdded = {this.addIngredientHandler}
           ingredientsRemoved = {this.removeIngredientHandler}

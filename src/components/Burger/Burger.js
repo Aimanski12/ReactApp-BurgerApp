@@ -10,10 +10,10 @@ const burger = (props) => {
 
   let transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
-    console.log('IgKey: ', igKey)
+    // console.log('IgKey: ', igKey)
         return [...Array(props.ingredients[igKey])].map((_, i) => {
           // console.log('the underscore', _)
-          console.log('the index', i)
+          // console.log('the index', i)
         return <BurgerIngredient key={igKey + i} type={igKey}/>
       })
     })
@@ -24,7 +24,7 @@ const burger = (props) => {
           // console.log('the EL', el)
         return arr.concat(el)
       }, [])
-      console.log('transformed Ingredients: ', transformedIngredients)
+      // console.log('transformed Ingredients: ', transformedIngredients)
 
       if(transformedIngredients.length === 0){
         transformedIngredients = <p>Please start adding your ingredients.</p>
