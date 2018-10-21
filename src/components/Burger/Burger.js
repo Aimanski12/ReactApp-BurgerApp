@@ -12,8 +12,8 @@ const burger = (props) => {
     .map(igKey => {
     // console.log('IgKey: ', igKey)
         return [...Array(props.ingredients[igKey])].map((_, i) => {
-          // console.log('the underscore', _)
-          // console.log('the index', i)
+          console.log('the underscore', _)
+          console.log('the index', i)
         return <BurgerIngredient key={igKey + i} type={igKey}/>
       })
     })
@@ -39,3 +39,39 @@ const burger = (props) => {
 }
 
 export default burger;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
