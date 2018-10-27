@@ -37,6 +37,7 @@ class BurgerBuilder extends Component {
   }
 
   componentDidMount () {
+    console.log('Burger builder: ', this.props)
     axios.get('https://aimanski-my-burger.firebaseio.com/ingredients.json')
       .then(res => {
         this.setState({ingredients: res.data})
@@ -78,25 +79,25 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredients)
   }
 
-  // removeIngredientHandler = (type) => {
-  //   const oldCount = this.state.ingredients[type];
-  //   if (oldCount <= 0) {
-  //     return;
-  //   }
-  //   const updatedCount = oldCount - 1;
-  //   const updatedIngredients = {
-  //     ...this.state.ingredients
-  //   }
-  //   updatedIngredients[type] = updatedCount;
-  //   const priceDeduction = INGREDIENT_PRICES[type];
-  //   const oldPrice = this.state.totalPrice;
-  //   const newPrice = oldPrice - priceDeduction;
-  //   this.setState({
-  //     totalPrice: newPrice,
-  //     ingredients: updatedIngredients
-  //   });
-  //   this.updatePurchaseState(updatedIngredients)
-  // }
+  removeIngredientHandler = (type) => {
+    const oldCount = this.state.ingredients[type];
+    if (oldCount <= 0) {
+      return;
+    }
+    const updatedCount = oldCount - 1;
+    const updatedIngredients = {
+      ...this.state.ingredients
+    }
+    updatedIngredients[type] = updatedCount;
+    const priceDeduction = INGREDIENT_PRICES[type];
+    const oldPrice = this.state.totalPrice;
+    const newPrice = oldPrice - priceDeduction;
+    this.setState({
+      totalPrice: newPrice,
+      ingredients: updatedIngredients
+    });
+    this.updatePurchaseState(updatedIngredients)
+  }
 
 
   purchaseHandler = () => {
@@ -107,39 +108,43 @@ class BurgerBuilder extends Component {
     this.setState({purchasing: false})
   }
 
-  purchaseContinueHandler = () => {
-    // alert('You continue')
-
-    // set the loading to true so that we can use the spinner
-    this.setState({loading: true})
-
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Manski',
-        address: {
-          street: '101 street',
-          zipCode: '12345',
-          country: 'US'
-        },
-        email: 'test@test.com'
-      },
-      deliveryMethod: 'fastest'
+    purchaseContinueHandler = () => {
+      this.props.history.push('/checkout')
     }
-    axios.post('/orders.json', order)
-      .then(response => {
-        console.log('Order Response: ', response)
-        // set the to false so that it will stop
-        this.setState({ loading: false, purchasing: false })
-      })
-      .catch(error => {
-        console.log('Order Error: ', error)
-        // set the to false so that it will stop
-        this.setState({ loading: false, purchasing: false })
+
+  // purchaseContinueHandler = () => {
+  //   // alert('You continue')
+
+  //   // set the loading to true so that we can use the spinner
+  //   this.setState({loading: true})
+
+  //   const order = {
+  //     ingredients: this.state.ingredients,
+  //     price: this.state.totalPrice,
+  //     customer: {
+  //       name: 'Manski',
+  //       address: {
+  //         street: '101 street',
+  //         zipCode: '12345',
+  //         country: 'US'
+  //       },
+  //       email: 'test@test.com'
+  //     },
+  //     deliveryMethod: 'fastest'
+  //   }
+  //   axios.post('/orders.json', order)
+  //     .then(response => {
+  //       console.log('Order Response: ', response)
+  //       // set the to false so that it will stop
+  //       this.setState({ loading: false, purchasing: false })
+  //     })
+  //     .catch(error => {
+  //       console.log('Order Error: ', error)
+  //       // set the to false so that it will stop
+  //       this.setState({ loading: false, purchasing: false })
         
-      })
-  }
+  //     })
+  // }
 
 
   render() {
