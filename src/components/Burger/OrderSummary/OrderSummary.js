@@ -8,7 +8,7 @@ class OrderSummary extends Component {
   
   // this can be a functional component
   componentWillUpdate() {
-    console.log('[OrderSummary] willUpdate')
+    // console.log('[OrderSummary] willUpdate')
   }
   
 
