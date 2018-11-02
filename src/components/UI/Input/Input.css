@@ -19,8 +19,9 @@
   font-family: inherit;
   padding: 6px 10px;
   display: block;
-  width: 100%
-
+  width: 80%;
+  margin: auto;
+  height: 18px;
 }
 
 .InputElement:focus {
@@ -30,3 +31,7 @@
 
 }
 
+.Invalid{
+  border: 1px solid red;
+  background-color: salmon
+}
