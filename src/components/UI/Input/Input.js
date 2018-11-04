@@ -27,7 +27,7 @@ const input = ( props ) => {
             break;
         case ('select'):
             inputElement = <select
-                className={inputClasses.join(' ')}
+                // className={inputClasses.join(' ')}
                 // className={classes.InputElement}
                 // placeholder={props.value}
                 value={props.value}
