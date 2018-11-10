@@ -14,7 +14,7 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../Fragment/withErrorHandler/withErrorHandler'
 
 import {connect} from 'react-redux'
-import * as actionTypes from '../../store/actions'
+import * as burgerBuilderActions from '../../store/actions/index'
 
 // const INGREDIENT_PRICES = {
 //   salad: 0.5,
@@ -227,14 +227,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onIngredientAdded: (ingName) => dispatch({
-      type: actionTypes.ADD_INGREDIENT,
-      ingredientName: ingName 
-    }),
-    onIngredientRemoved: (ingName) => dispatch({
-      type: actionTypes.REMOVE_INGREDIENT,
-      ingredientName: ingName 
-    })
+    onIngredientAdded: (ingName) => dispatch(
+      burgerBuilderActions.addIngredient(ingName)
+      // type: actionTypes.ADD_INGREDIENT,
+      // ingredientName: ingName 
+    ),
+    onIngredientRemoved: (ingName) => dispatch(
+      burgerBuilderActions.removeIngredient(ingName)
+      // type: actionTypes.REMOVE_INGREDIENT,
+      // ingredientName: ingName 
+    )
   }
 }
 
