@@ -24,21 +24,38 @@ export const purchaseBurgerFailed = (error) => {
 
 
 
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START,
+  }
+}
+
+
 
 
 // asynchronous functions
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurger = (orderData) => {
+  // console.log('orderData: ', orderData)
   return dispatch => {
+    dispatch(purchaseBurgerStart());
     axios.post( '/orders.json', orderData )
             .then( response => {
                 console.log('response data aqui: ', response.data)
-                dispatch(purchaseBurgerSuccess(response.data, orderData))
+                dispatch(purchaseBurgerSuccess(response.data.name, orderData))
                 // this.setState( { loading: false } );
                 // this.props.history.push( '/' );
             } )
             .catch( error => { 
+              console.log('error: ', error)
               dispatch(purchaseBurgerFailed(error))
                 // this.setState( { loading: false } );
             } );
+  }
+}
+
+
+export const purchaseInit = () => {
+  return {
+    type: actionTypes.PURCHASE_INIT
   }
 }

@@ -14,7 +14,7 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../Fragment/withErrorHandler/withErrorHandler'
 
 import {connect} from 'react-redux'
-import * as burgerBuilderActions from '../../store/actions/index'
+import * as actions from '../../store/actions/index'
 
 // const INGREDIENT_PRICES = {
 //   salad: 0.5,
@@ -115,6 +115,7 @@ class BurgerBuilder extends Component {
 
   
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase()
     this.props.history.push('/checkout')
     // console.log('burger ingredients: ', this.state.ingredients)
     // const queryParams = []
@@ -222,27 +223,30 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
-    error: state.error
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onIngredientAdded: (ingName) => dispatch(
-      burgerBuilderActions.addIngredient(ingName)
+      actions.addIngredient(ingName)
       // type: actionTypes.ADD_INGREDIENT,
       // ingredientName: ingName 
     ),
     onIngredientRemoved: (ingName) => dispatch(
-      burgerBuilderActions.removeIngredient(ingName)
+      actions.removeIngredient(ingName)
       // type: actionTypes.REMOVE_INGREDIENT,
       // ingredientName: ingName 
     ),
     onInitIngredients: () => dispatch( 
-      burgerBuilderActions.initIngredients()
-    )
+      actions.initIngredients()
+    ),
+    onInitPurchase: () => {
+      dispatch(actions.purchaseInit())
+    }
   }
 }
 
