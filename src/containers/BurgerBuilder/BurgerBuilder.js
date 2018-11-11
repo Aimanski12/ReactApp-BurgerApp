@@ -34,20 +34,22 @@ class BurgerBuilder extends Component {
     // totalPrice: 4,
     // purchasable: false,
     purchasing: false,
-    loading: false,
-    error: false
+    // loading: false,
+    // error: false
   }
 
   componentDidMount () {
+    this.props.onInitIngredients()
     // console.log('Burger builder: ', this.props)
-    axios.get('https://aimanski-my-burger.firebaseio.com/ingredients.json')
-      .then(res => {
-        this.setState({ingredients: res.data})
-        // console.log(res)
-      })
-      .catch(err => {
-        this.setState({error: true})
-      })
+    // axios.get('https://aimanski-my-burger.firebaseio.com/ingredients.json')
+    //   .then(res => {
+    //     this.setState({ingredients: res.data})
+    //     // console.log(res)
+    //   })
+    //   .catch(err => {
+    //     this.setState({error: true})
+    //   })
+
   }
 
   updatePurchaseState(ingredients) {
@@ -176,7 +178,7 @@ class BurgerBuilder extends Component {
     
     
     let orderSummary = null;
-    let burger = this.state.error ? <p>Ingedients can't be loaded</p> : <Spinner />
+    let burger = this.props.error ? <p>Ingedients can't be loaded</p> : <Spinner />
     
     if(this.props.ings){
       
@@ -202,9 +204,9 @@ class BurgerBuilder extends Component {
     />
   }
   
-  if(this.state.loading){
-    orderSummary = <Spinner />
-  }
+  // if(this.state.loading){
+  //   orderSummary = <Spinner />
+  // }
 
     return (
       <Main>
@@ -221,7 +223,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     ings: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    error: state.error
   }
 }
 
@@ -236,6 +239,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       burgerBuilderActions.removeIngredient(ingName)
       // type: actionTypes.REMOVE_INGREDIENT,
       // ingredientName: ingName 
+    ),
+    onInitIngredients: () => dispatch( 
+      burgerBuilderActions.initIngredients()
     )
   }
 }
