@@ -59,3 +59,58 @@ export const purchaseInit = () => {
     type: actionTypes.PURCHASE_INIT
   }
 }
+
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+// action creators for the orders Menu
+
+
+// synchronous codes
+export const fetchOrdersSuccess = (orders) => {
+  return {
+    type: actionTypes.FETCH_ORDERS_SUCCESS,
+    orders: orders
+  }
+}
+
+export const fetchOrdersFail = (error) => {
+  return {
+    type: actionTypes.FETCH_ORDERS_FAIL,
+    error: error
+  }
+}
+
+export const fetchOrderStart = () => {
+  return {
+    type: actionTypes.FETCH_ORDERS_START
+  }
+}
+
+
+// asynchronous codes
+export const fetchOrders = () => {
+  return dispatch => {
+    dispatch(fetchOrderStart())
+    axios.get('/orders.json')
+    .then(res => {
+      // console.log('response data: ', res.data)
+      const fetchedOrders = []
+        for( let key in res.data ) {
+          fetchedOrders.push({
+            ...res.data[key],
+            id: key
+          })
+        }
+          dispatch(fetchOrdersSuccess(fetchedOrders))
+          // this.setState({loading: false, orders: fetchedOrders});
+          // console.log('response data: ', fetchedOrders)
+    })
+    .catch(err => {
+      dispatch(fetchOrdersFail(err))
+      // this.setState({loading: false});
+    })
+  }
+}
+
