@@ -34,13 +34,14 @@ export const purchaseBurgerStart = () => {
 
 
 // asynchronous functions
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
   // console.log('orderData: ', orderData)
   return dispatch => {
     dispatch(purchaseBurgerStart());
-    axios.post( '/orders.json', orderData )
-            .then( response => {
-                console.log('response data aqui: ', response.data)
+    axios.post( '/orders.json?auth=' + token, orderData )
+    .then( response => {
+      // console.log('token: ', token)
+                // console.log('response data aqui: ', response)
                 dispatch(purchaseBurgerSuccess(response.data.name, orderData))
                 // this.setState( { loading: false } );
                 // this.props.history.push( '/' );
@@ -90,10 +91,10 @@ export const fetchOrderStart = () => {
 
 
 // asynchronous codes
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
   return dispatch => {
     dispatch(fetchOrderStart())
-    axios.get('/orders.json')
+    axios.get('/orders.json?auth=' + token)
     .then(res => {
       // console.log('response data: ', res.data)
       const fetchedOrders = []

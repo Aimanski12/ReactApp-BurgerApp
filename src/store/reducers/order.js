@@ -10,7 +10,7 @@ const initialState = {
 
 const purchaseInit = (state, action) => {
   return updateObject(state, {
-    purchase: false
+    purchased: false
   })
 }
 

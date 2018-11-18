@@ -40,7 +40,7 @@ const input = ( props ) => {
                 ))}
             </select>
             
-            console.log('props: ', inputClasses)
+            // console.log('props: ', inputClasses)
             break;
         default:
             inputElement = <input
