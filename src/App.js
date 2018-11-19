@@ -14,8 +14,15 @@ import Auth from './containers/Auth/Auth'
 
 import Logout from './containers/Auth/Logout/Logout'
 
+import {connect} from 'react-redux'
+
+import * as actions from './store/actions/index';
+
 class App extends Component {
 
+  componentDidMount(){
+    this.props.onTryAutoSignup()
+  }
   // state = {
   //   show: true
   // }
@@ -44,4 +51,14 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onTryAutoSignup: () => {
+      dispatch(actions.authCheckState())
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps) (App);
