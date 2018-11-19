@@ -6,7 +6,7 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 
 import Checkout from './containers/Checkout/Checkout'
 
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, withRouter} from 'react-router-dom'
 
 import Orders from './containers/Orders/Orders'
 
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 
-export default connect(null, mapDispatchToProps) (App);
+export default withRouter(connect(null, mapDispatchToProps) (App));
