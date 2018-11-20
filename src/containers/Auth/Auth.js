@@ -179,7 +179,7 @@ const mapStateToProps = (state, ownProps) => {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuthenticated: state.auth.token !== null,
-    buildingBurder: state.burgerBuilder.building,
+    buildingBurger: state.burgerBuilder.building,
     authRedirectPath: state.auth.authRedirectPath
   }
 }
