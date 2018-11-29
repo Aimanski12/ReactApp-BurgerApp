@@ -17,7 +17,7 @@ import authReducer from './store/reducers/auth'
 import ReduxThunk from 'redux-thunk'
 
 import createSagaMiddleware from 'redux-saga'
-import {logoutSaga} from '../src/store/sagas/auth'
+import {watchAuth} from '../src/store/sagas'
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
@@ -36,7 +36,7 @@ const store = createStore(
     applyMiddleware(ReduxThunk, sagaMiddleware)  
   ))
 
-// sagaMiddleware.run(logoutSaga)
+sagaMiddleware.run(watchAuth)
 
 
 const app = (
